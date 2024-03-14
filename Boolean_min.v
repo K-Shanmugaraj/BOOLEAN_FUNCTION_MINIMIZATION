@@ -1,19 +1,17 @@
-//Program to compute the function f1=a'b'c'd'+ac'd'+b'cd'+a'bcd+bc'd
-//f2=xy'z+x'y'z+w'xy+wx'y+wxy
-// simplify the logic using Boolean minimization/k map 
-//compute f2 and write verilog code for f2 as like f1
-module Boolean_min(a,b,c,d,w,x,y,z,f1,f2);
-input a,b,c,d,w,x,y,z;
-output f1,f2;
-wire adash,bdash,cdash,ddash,ydash,p,q,r,s,t,u;
-not(adash,a);
-not(bdash,b);
-not(cdash,c);
-not(ddash,d);
-not(ydash,y);
-and(p,bdash,ddash);
-and(q,adash,b,d);
-and(r,a,b,cdash);
-or(f1,p,q,r);
-//type code for f2 as like f1
+module Boolean_min(A,B,C,D,X,Y,Z,W,F1,F2);
+input A,B,C,D,X,Y,Z,W;
+output F1,F2;
+wire x1,x2,x3,x4,x5,x6,x7,x8,x9;
+assign x1=(~A)&(~B)&(~C)&(~D);
+assign x2=(A)&(~C)&(~D);
+assign x3=(~B)&(C)&(~D);
+assign x4=(~A)&(B)&(C)&(D);
+assign x5=(B)&(~C)&(D);
+assign x6=(X)&(~Y)&(Z);
+assign x7=(~X)&(~Y)&(Z);
+assign X8=(~w)&(X)&(Y);
+assign x9=(W)&(~X)&(Y);
+assign x10=(W)&(X)&(Y);
+assign F1=x1|x2|x3|x4|x5;
+assign F2=x6|x7|x8|x9|x10;
 endmodule
